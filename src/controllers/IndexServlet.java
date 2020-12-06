@@ -34,14 +34,14 @@ public class IndexServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         EntityManager em = DBUtil.createEntityManager();
 
-        List<Message> management = em.createNamedQuery("getAllManagement", Message.class).getResultList();
-        response.getWriter().append(Integer.valueOf(management.size()).toString());
+        List<Message> tasks = em.createNamedQuery("getAlltasks", Message.class).getResultList();
+        response.getWriter().append(Integer.valueOf(tasks.size()).toString());
 
         em.close();
 
-        request.setAttribute("management", management);
+        request.setAttribute("tasks", tasks);
 
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/management/index.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/tasks/index.jsp");
         rd.forward(request, response);
     }
 
